@@ -20,6 +20,6 @@ export class createUserDTO {
   email: string;
 
   @IsOptional()
-  @IsString()
-  auto: string;
+  @IsNumber()
+  auto: number;
 }

@@ -1,17 +1,18 @@
 import { Body, Controller, Post, Res, Get, Delete, Put } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { createUserDTO } from '../database/users-dto/create.user.dto';
-import { deleteUserDTO } from 'src/database/users-dto/delete.user.dto';
-import { updateUserDTO } from 'src/database/users-dto/update.user.dto';
+import { AutoService } from './auto.service';
+import { createAutoDTO } from 'src/database/auto-dto/create.auto.dto';
+import { updateAutoDTO } from 'src/database/auto-dto/update.auto.dto';
+import { deleteAutoDTO } from 'src/database/auto-dto/delete.auto.dto';
 
-@Controller('users')
-export class UsersController {
-  constructor(private UsersService: UsersService) {}
+@Controller('auto')
+export class AutoController {
+  constructor(private AutoService: AutoService) {}
 
   @Post()
-  async createUser(@Body() body: createUserDTO, @Res() res) {
+  async createUser(@Body() body: createAutoDTO, @Res() res) {
     try {
-      const result = await this.UsersService.addUser(body);
+      console.log(body);
+      const result = await this.AutoService.addAuto(body);
       res.status(201).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
@@ -21,7 +22,7 @@ export class UsersController {
   @Get()
   async listUsers(@Res() res) {
     try {
-      const result = await this.UsersService.getUsers();
+      const result = await this.AutoService.getAutos();
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
@@ -29,9 +30,9 @@ export class UsersController {
   }
 
   @Delete()
-  async deleteUser(@Body() body: deleteUserDTO, @Res() res) {
+  async deleteUser(@Body() body: deleteAutoDTO, @Res() res) {
     try {
-      const result = await this.UsersService.deleteUserFromDB(body);
+      const result = await this.AutoService.deleteAutoFromDB(body);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
@@ -39,9 +40,9 @@ export class UsersController {
   }
 
   @Put()
-  async updateUser(@Body() body: updateUserDTO, @Res() res) {
+  async updateUser(@Body() body: updateAutoDTO, @Res() res) {
     try {
-      const result = await this.UsersService.updateUser(body);
+      const result = await this.AutoService.updateAuto(body);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
@@ -51,7 +52,7 @@ export class UsersController {
   @Get('/user')
   async usersWithOutCar(@Res() res) {
     try {
-      const result = await this.UsersService.usersWithOutCar();
+      const result = await this.AutoService.autoWithoutOwner();
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });

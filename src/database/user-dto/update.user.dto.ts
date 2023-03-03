@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsOptional,
 } from 'class-validator';
+import { Auto } from '../entities/auto.entity';
 
 export class updateUserDTO {
   @IsNotEmpty()
@@ -21,8 +22,4 @@ export class updateUserDTO {
   @IsOptional()
   @IsEmail()
   email: string;
-
-  @IsOptional()
-  @IsString()
-  auto: string;
 }
