@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { IsString, IsNotEmpty, IsOptional, IsDate } from 'class-validator';
 import { User } from '../entities/user.entity';
 
@@ -14,6 +15,7 @@ export class updateAutoDTO {
   model: string;
 
   @IsOptional()
+  @Type(() => Date)
   @IsDate()
   release: Date;
 

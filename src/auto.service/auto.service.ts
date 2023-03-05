@@ -12,23 +12,23 @@ export class AutoService {
     @InjectRepository(Auto) private autoRepository: Repository<Auto>,
   ) {}
 
-  addAuto(auto: createAutoDTO) {
+  addCar(auto: createAutoDTO) {
     return this.autoRepository.save(auto);
   }
 
-  getAutos() {
+  getCars() {
     return this.autoRepository.find();
   }
 
-  deleteAutoFromDB(auto: deleteAutoDTO) {
+  deleteCarFromDB(auto: deleteAutoDTO) {
     return this.autoRepository.delete(auto);
   }
 
-  updateAuto(auto: updateAutoDTO) {
+  updateCar(auto: updateAutoDTO) {
     return this.autoRepository.update(auto.id, auto);
   }
 
-  autoWithoutOwner(brand?: string) {
+  carWithoutOwner(brand?: string) {
     return this.autoRepository.find({
       where: { owner: IsNull(), ...(brand ? { brand } : {}) },
     });

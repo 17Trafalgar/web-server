@@ -5,7 +5,6 @@ import {
   IsNotEmpty,
   IsOptional,
 } from 'class-validator';
-import { Auto } from '../entities/auto.entity';
 
 export class updateUserDTO {
   @IsNotEmpty()

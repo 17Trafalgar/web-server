@@ -9,10 +9,10 @@ export class AutoController {
   constructor(private AutoService: AutoService) {}
 
   @Post()
-  async createUser(@Body() body: createAutoDTO, @Res() res) {
+  async createAuto(@Body() body: createAutoDTO, @Res() res) {
     try {
       console.log(body);
-      const result = await this.AutoService.addAuto(body);
+      const result = await this.AutoService.addCar(body);
       res.status(201).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
@@ -20,9 +20,9 @@ export class AutoController {
   }
 
   @Get()
-  async listUsers(@Res() res) {
+  async listAuto(@Res() res) {
     try {
-      const result = await this.AutoService.getAutos();
+      const result = await this.AutoService.getCars();
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
@@ -30,9 +30,9 @@ export class AutoController {
   }
 
   @Delete()
-  async deleteUser(@Body() body: deleteAutoDTO, @Res() res) {
+  async deleteAutoFromDB(@Body() body: deleteAutoDTO, @Res() res) {
     try {
-      const result = await this.AutoService.deleteAutoFromDB(body);
+      const result = await this.AutoService.deleteCarFromDB(body);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
@@ -40,19 +40,19 @@ export class AutoController {
   }
 
   @Put()
-  async updateUser(@Body() body: updateAutoDTO, @Res() res) {
+  async updateAuto(@Body() body: updateAutoDTO, @Res() res) {
     try {
-      const result = await this.AutoService.updateAuto(body);
+      const result = await this.AutoService.updateCar(body);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
     }
   }
 
-  @Get('/user')
-  async usersWithOutCar(@Res() res) {
+  @Get('/car')
+  async autosWithoutOwner(@Res() res) {
     try {
-      const result = await this.AutoService.autoWithoutOwner();
+      const result = await this.AutoService.carWithoutOwner();
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: 'Invalid request' });
